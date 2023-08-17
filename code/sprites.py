@@ -94,12 +94,16 @@ class Ball(pygame.sprite.Sprite):
             if self.direction.magnitude() != 0:
                 self.direction = self.direction.normalize()
 
+            # horizontal movement + collision
             self.pos.x += self.direction.x * self.speed * dt
             self.rect.x = (round(self.pos.x))
+            self.collision('horizontal')
             self.window_collision('horizontal')
 
+            # vertical movement + collision
             self.pos.y += self.direction.y * self.speed * dt
             self.rect.y = (round(self.pos.y))
+            self.collision('vertical')
             self.window_collision('vertical')
         else:
             self.rect.midbottom = self.player.rect.midtop
