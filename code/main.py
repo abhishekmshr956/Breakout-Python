@@ -1,6 +1,6 @@
 import pygame, sys, time
 from settings import *
-from sprites import Player
+from sprites import Player, Ball
 
 class Game:
     def __init__(self):
@@ -18,6 +18,7 @@ class Game:
 
         # setup
         self.player = Player(self.all_sprites)
+        self.ball = Ball(self.all_sprites, self.player)
 
     def create_bg(self):
         bg_original = pygame.image.load('../graphics/other/bg.png').convert()
@@ -40,6 +41,10 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.ball.active = True
 
             # update the game
             self.all_sprites.update(dt)
