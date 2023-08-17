@@ -89,6 +89,7 @@ class Ball(pygame.sprite.Sprite):
 
 
     def collision(self, direction):
+        
         # find overlaping objects
         overlap_sprites = []
         if self.rect.colliderect(self.player.rect):
