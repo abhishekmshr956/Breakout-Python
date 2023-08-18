@@ -23,6 +23,9 @@ class Game:
         self.player = Player(self.all_sprites, self.surfacemaker)
         self.stage_setup()
         self.ball = Ball(self.all_sprites, self.player, self.block_sprites)
+
+        # # hearts
+        # self.heart_surf = pygame.image.load('../graphics/other/heart.png').convert_alpha()
         
 
     def create_bg(self):
