@@ -84,7 +84,15 @@ class Ball(pygame.sprite.Sprite):
                 self.direction.y *= -1
 
             if self.rect.bottom > WINDOW_HEIGHT:
-                self.active = False
+                # uncomment this line if you want game not to start automatically after it hits the bottom
+                # self.active = False 
+
+                # remove these two lines if you don't want to automatically restart
+                #################################
+                self.rect.midbottom = self.player.rect.midtop
+                self.pos = pygame.math.Vector2(self.rect.topleft)
+                #################################
+
                 self.direction.y = -1
             
 
