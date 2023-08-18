@@ -162,7 +162,7 @@ class Block(pygame.sprite.Sprite):
         self.old_rect = self.rect.copy()
 
         # damage information
-        self.health = int(block_type)
+        self.health = 1
 
     def get_damage(self, amount):
         self.health -= amount
