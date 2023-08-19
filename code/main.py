@@ -49,6 +49,9 @@ class Game:
         
 
     def run(self):
+        clock = pygame.time.Clock()
+        desired_fps = 50
+
         last_time = time.time()
         while True:
 
@@ -75,6 +78,9 @@ class Game:
 
             # update window
             pygame.display.update()
+
+            # Limit the frame rate to the desired FPS
+            clock.tick(desired_fps)
 
 if __name__ == '__main__':
     game = Game()
