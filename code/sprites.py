@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.old_rect = self.rect.copy()
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.topleft)
-        self.speed = 300
+        self.speed = 150
         
 
     def input(self):
