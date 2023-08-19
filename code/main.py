@@ -26,6 +26,11 @@ class Game:
 
         # # hearts
         # self.heart_surf = pygame.image.load('../graphics/other/heart.png').convert_alpha()
+
+        # self.music = pygame.mixer.Sound('../sounds/music.wav')
+        self.music = pygame.mixer.Sound('../sounds/Phase4.mp3')
+        self.music.set_volume(1.0)
+        self.music.play(loops=-1)
         
 
     def create_bg(self):

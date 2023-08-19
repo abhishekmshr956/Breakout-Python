@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
 
         # setup
         self.surfacemaker = surfacemaker
-        self.image = surfacemaker.get_surf('player', (WINDOW_WIDTH // 10, WINDOW_HEIGHT // 20))
+        self.image = surfacemaker.get_surf('player', (WINDOW_WIDTH // 7, WINDOW_HEIGHT // 20))
 
         # position
         self.rect = self.image.get_rect(midbottom = (WINDOW_WIDTH // 2, WINDOW_HEIGHT - 20))
@@ -60,10 +60,18 @@ class Ball(pygame.sprite.Sprite):
         self.old_rect = self.rect.copy()
         self.pos = pygame.math.Vector2(self.rect.topleft)
         self.direction = pygame.math.Vector2((choice((1,-1)),-1))
-        self.speed = 100
+        self.speed = 150
 
         # active
         self.active = False
+
+        # sounds
+
+        self.impact_sound = pygame.mixer.Sound('../sounds/impact.wav')
+        self.impact_sound.set_volume(0.1)
+
+        self.fail_sound = pygame.mixer.Sound('../sounds/fail.wav')
+        self.fail_sound.set_volume(0.1)
 
     def window_collision(self, direction):
         if direction == 'horizontal':
@@ -94,6 +102,7 @@ class Ball(pygame.sprite.Sprite):
                 #################################
 
                 self.direction.y = -1
+                self.fail_sound.play()
             
 
 
@@ -111,11 +120,13 @@ class Ball(pygame.sprite.Sprite):
                         self.rect.right = sprite.rect.left - 1
                         self.pos.x = self.rect.x
                         self.direction.x *= -1
+                        self.impact_sound.play()
 
                     if self.rect.left <= sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
                         self.rect.left = sprite.rect.right + 1
                         self.pos.x = self.rect.x
                         self.direction.x *= -1
+                        self.impact_sound.play()
 
                     if getattr(sprite, 'health', None):
                         sprite.get_damage(1)
@@ -126,11 +137,13 @@ class Ball(pygame.sprite.Sprite):
                         self.rect.bottom = sprite.rect.top - 1
                         self.pos.y = self.rect.y
                         self.direction.y *= -1
+                        self.impact_sound.play()
 
                     if self.rect.top <= sprite.rect.bottom and self.old_rect.top >= sprite.old_rect.bottom:
                         self.rect.top = sprite.rect.bottom + 1
                         self.pos.y = self.rect.y
                         self.direction.y *= -1
+                        self.impact_sound.play()
 
                     if getattr(sprite, 'health', None):
                         sprite.get_damage(1)
